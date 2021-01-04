@@ -40,8 +40,13 @@ public class SystemClient {
   String DEFAULT_PORT;
 
   // Basic Auth Credentials
-  private String username = "bob";
-  private String password = "bobpwd";
+  @Inject
+  @ConfigProperty(name="SYSTEM_APP_USERNAME")
+  private String username;
+  
+  @Inject
+  @ConfigProperty(name="SYSTEM_APP_PASSWORD")
+  private String password;
 
   // Wrapper function that gets properties
   public Properties getProperties(String hostname) {

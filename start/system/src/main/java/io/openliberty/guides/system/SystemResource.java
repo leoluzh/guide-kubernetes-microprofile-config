@@ -27,17 +27,22 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @RequestScoped
 @Path("/properties")
 public class SystemResource {
+	
+  @Inject
+  @ConfigProperty(name="APP_NAME")
+  private String appName;
 
   @Inject
   @ConfigProperty(name = "HOSTNAME")
   private String hostname;
-
+  
+  
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response getProperties() {
     return Response.ok(System.getProperties())
       .header("X-Pod-Name", hostname)
-      .header("X-App-Name", "system")
+      .header("X-App-Name", appName)
       .build();
   } 
 }
